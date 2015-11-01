@@ -1,143 +1,184 @@
 package buildings;
 
-import com.sun.scenario.effect.Flood;
-
 /**
  * Created by Kingv_000 on 05.10.2015.
  */
 
 
-public class Dwelling  {
-    private  DwellingFloor[] floors;
-    private int sizeOfDwelling;
+public class Dwelling implements Building{
+    private Floor[] dwellingFloors;
 
-    public Dwelling(int amountOfFloor, int[] amountOfFlats){
-        this.sizeOfDwelling = amountOfFloor;
-        this.floors = new DwellingFloor[amountOfFloor];
+    public Dwelling(int countOfFloor, int[] countOfFlat){
+        this.dwellingFloors = new DwellingFloor[countOfFloor];
 
-
-    }
-    public Dwelling(DwellingFloor[] arrayOfDwellingFloor){
-        floors = arrayOfDwellingFloor;
-        for (int i = 0; i <floors.length ; i++) {
-            floors[i] = new DwellingFloor(10);
+        for (int i = 0; i < countOfFlat.length; i++) {
+            this.dwellingFloors[i] = new DwellingFloor(countOfFlat[i]);
         }
-        sizeOfDwelling = floors.length;
-
     }
 
-    public int getNumberOfFloor() {
-        return sizeOfDwelling;
+    public Dwelling(Floor[] dwellingFloors){
+        this.dwellingFloors = dwellingFloors;
     }
-    public int getNumberSpaceOfBuilding() {
-        int commonAmountOfFlats = 0;
-        for(int i = 0; i < sizeOfDwelling; i++) {
-            commonAmountOfFlats += floors[i].getNumberOfSpaces();
+
+    public int getFloorsCount(){
+        return this.dwellingFloors.length;
+    }
+
+    public int getCountOfSpace(){
+        int countOfFlat = 0;
+
+        for (int i = 0; i < this.dwellingFloors.length; i++) {
+            countOfFlat += this.dwellingFloors[i].getCountOfSpace();
         }
-        return commonAmountOfFlats;
+
+        return countOfFlat;
     }
-    public double getAllAreaOfBuilding() {
-        double commonAreaOfDwelling = 0;
-        for(int i = 0; i < sizeOfDwelling; i++) {
-            commonAreaOfDwelling += floors[i].getAllAreaOfFloor();
+
+    public float getTotalArea(){
+        int totalArea = 0;
+
+        for (int i = 0; i < this.dwellingFloors.length; i++) {
+            totalArea += this.dwellingFloors[i].getTotalArea();
         }
-        return commonAreaOfDwelling;
+
+        return totalArea;
     }
 
-    public int getNumberRoomsOfBuilding() {
-        int totalAmountFlatsOfDwelling = 0;
-        for (int i = 0; i < sizeOfDwelling; i++) {
-            totalAmountFlatsOfDwelling += floors[i].getNumberOfSpaces();
+    public int getTotalRoomsCount(){
+        int totalRoomsCount = 0;
+
+        for (int i = 0; i < this.dwellingFloors.length; i++) {
+            totalRoomsCount += this.dwellingFloors[i].getTotalCountOfRooms();
         }
-        return totalAmountFlatsOfDwelling;
+
+        return totalRoomsCount;
     }
 
-    public DwellingFloor[] getMassFloor(){
-        return floors;
+    public Floor[] getFloors(){
+        return this.dwellingFloors;
     }
-    public DwellingFloor getOneFloor(int numberOfDwelling, DwellingFloor newDwellingFloor){
-        return floors[numberOfDwelling]= newDwellingFloor;
-    }
-    public void changeFloor(int numberOfDwellingFloor,DwellingFloor newDwellingFloor){
-        floors[numberOfDwellingFloor]= newDwellingFloor;
 
+    public Floor getFloor(int number){
+        if (number > this.dwellingFloors.length) throw new FloorIndexOutOfBoundsException("Index out!");
+        else
+            return this.dwellingFloors[number];
     }
-    public void changeSpace(int numberOfFlat, Space newFlat) {
-        int count = 0;
-        for(int i = 0; i < floors.length; i++) {
-            if((count <= numberOfFlat)&&(numberOfFlat <= (count + floors[i].getNumberOfSpaces()))){
-                floors[i].changeSpace(numberOfFlat - count, newFlat);
-            } else {
-                count += floors[i].getNumberOfSpaces();
+
+    public void setFloor(int number, Floor floor){
+        this.dwellingFloors[number] = floor;
+    }
+
+    public Flat getSpace(int numberFlat){
+        int countOFFlat = 0;
+        Flat flat = null;
+        int deepNumberFlat = 0;
+        for (int i = 0; i < this.dwellingFloors.length; i++) {
+            countOFFlat += this.dwellingFloors[i].getCountOfSpace();
+
+            if (countOFFlat > numberFlat){
+                if (i != 0) countOFFlat -= this.dwellingFloors[i - 1].getCountOfSpace();
+                else countOFFlat -= this.dwellingFloors[i].getCountOfSpace();
+                deepNumberFlat = (numberFlat - countOFFlat);
+                flat = (Flat)this.dwellingFloors[i].getSpace(deepNumberFlat);
+                break;
             }
         }
+
+        return flat;
     }
 
+    public void setSpace(int numberFlat, Space space){
+        int countOFFlat = 0;
+        int deepNumberFlat = 0;
+        for (int i = 0; i < this.dwellingFloors.length; i++) {
+            countOFFlat += this.dwellingFloors[i].getCountOfSpace();
 
-   /* public Space getOneSpace(int numberOfFlat) {
-        int count = 0;
-        for(int i = 0; i < floors.length; i++) {
-            if((count <= numberOfFlat)&&(numberOfFlat <= (count + floors[i].getNumberOfSpaces()))){
-                return floors[i].getOneSpace(numberOfFlat - count);
-            } else {
-                count += floors[i].getNumberOfSpaces();
+            if (countOFFlat >= numberFlat){
+                if (i != 0) countOFFlat -= this.dwellingFloors[i - 1].getCountOfSpace();
+                else countOFFlat -= this.dwellingFloors[i].getCountOfSpace();
+                deepNumberFlat = (numberFlat - countOFFlat);
+                this.dwellingFloors[i].setSpace(deepNumberFlat, space);
+                break;
             }
         }
-        return null;
-    }*/
-   public void addSpace(int numberOfFlat, Space newFlat) {
-       int count = 0;
-       for(int i = 0; i < floors.length; i++) {
-           if((count <= numberOfFlat)&&(numberOfFlat <= (count + floors[i].getNumberOfSpaces()))){
-               floors[i].addFitSpace(numberOfFlat - count, newFlat);
-           } else {
-               count += floors[i].getNumberOfSpaces();
-           }
-       }
-   }
-    public Space getBestSpace() {
-        Space bestSpace = floors[0].getBestSpace();
-        for (int i = 0; i < floors.length; i++) {
-            if (bestSpace.getArea() < floors[i].getBestSpace().getArea()) ;
-            {
-                bestSpace = floors[i].getBestSpace();
-            }
 
-        }
-        return bestSpace;
     }
-    public Space[] sortSpace() {
-        Space[] sortedArray = new Flat[this.getNumberRoomsOfBuilding()];
-        Space lastMaxFlat = new Flat(this.getBestSpace().getArea());
-        double max = 0;
-        for(int k = 0; k < sortedArray.length; k++) {
-            max = 0;
-            for(int i = 0; i < floors.length; i++){
-                for(int j = 0; j < floors[i].getNumberOfSpaces();j++) {
-                    if((floors[i].getOneSpace(j).getArea() >= max)&&(floors[i].getOneSpace(j).getArea() <= lastMaxFlat.getArea())&&(lastMaxFlat != floors[i].getOneSpace(j))) {
-                        max = floors[i].getOneSpace(j).getArea();
-                        sortedArray[k] = floors[i].getOneSpace(j);
-                    }
+
+    public void addSpace(int numberFlat, Space space){
+        int countOFFlat = 0;
+        int deepNumberFlat = 0;
+        for (int i = 0; i < this.dwellingFloors.length; i++) {
+            countOFFlat += this.dwellingFloors[i].getCountOfSpace();
+
+            if (countOFFlat >= numberFlat){
+                if (i != 0) countOFFlat -= this.dwellingFloors[i - 1].getCountOfSpace();
+                else countOFFlat -= this.dwellingFloors[i].getCountOfSpace();
+                deepNumberFlat = (numberFlat - countOFFlat);
+                this.dwellingFloors[i].addSpace(space);
+                break;
+            }
+        }
+
+    }
+
+    public void deleteSpace(int numberFlat){
+        int countOFFlat = 0;
+        int deepNumberFlat = 0;
+        for (int i = 0; i < this.dwellingFloors.length; i++) {
+            countOFFlat += this.dwellingFloors[i].getCountOfSpace();
+
+            if (countOFFlat >= numberFlat){
+                if (i != 0) countOFFlat -= this.dwellingFloors[i - 1].getCountOfSpace();
+                else countOFFlat -= this.dwellingFloors[i].getCountOfSpace();
+                deepNumberFlat = (numberFlat - countOFFlat);
+                this.dwellingFloors[i].deleteSpace(deepNumberFlat);
+                break;
+            }
+        }
+
+
+    }
+
+    public Space getBestSpace(){
+        Space bestFlat = this.dwellingFloors[0].getBestSpace();
+
+        for (int i = 0; i < this.dwellingFloors.length; i++) {
+            if (this.dwellingFloors[i].getBestSpace().getArea() > bestFlat.getArea()){
+                bestFlat = this.dwellingFloors[i].getBestSpace();
+            }
+        }
+
+        return bestFlat;
+    }
+
+    public Space[] getSortedSpace(){
+        Space[] sortedFlats = new Flat[getCountOfSpace()];
+        int a = 0;
+        for (int i = 0; i < this.dwellingFloors.length; i++) {
+            for (int j = 0; j <this.dwellingFloors[i].getCountOfSpace() ; j++) {
+                sortedFlats[a] = this.dwellingFloors[i].getSpace(j);
+                a++;
+            }
+        }
+
+        Space bufFlat = null;
+
+        for (int i = 0; i < sortedFlats.length; i++) {
+            for (int j = 0; j < sortedFlats.length; j++) {
+                if (sortedFlats[i].getArea() > sortedFlats[j].getArea()){
+                    bufFlat = sortedFlats[i];
+                    sortedFlats[i] = sortedFlats[j];
+                    sortedFlats[j] = bufFlat;
                 }
             }
-            lastMaxFlat = sortedArray[k];
         }
-        return sortedArray;
+
+
+        return sortedFlats;
     }
 
 
 
 
 
-    public void deleteSpace(int number){
-
-    }
-    }
-
-
-
-
-
-
-
-
+}

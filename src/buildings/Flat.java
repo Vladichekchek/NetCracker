@@ -5,11 +5,11 @@ package buildings;
  */
 public class Flat implements Space {
     private static final int DEFAULT_AMOUNT_OF_ROOMS = 2;
-    private static final double DEFAULT_AREA = 50;
+    private static final float DEFAULT_AREA = 50;
     private int amountOfRooms;
-    private double area;
+    private float area;
 
-    public Flat(double area,int amountOfRooms){
+    public Flat(float area,int amountOfRooms){
         this.area = area;
         this.amountOfRooms = amountOfRooms;
     }
@@ -18,7 +18,7 @@ public class Flat implements Space {
         this(DEFAULT_AREA, DEFAULT_AMOUNT_OF_ROOMS);
     }
 
-    public Flat(double area) {
+    public Flat(float area) {
         this.area = area;
         amountOfRooms = DEFAULT_AMOUNT_OF_ROOMS;
     }
@@ -35,11 +35,11 @@ public class Flat implements Space {
         }
     }
 
-    public double getArea() {
+    public float getArea() {
         return area;
     }
 
-    public void setArea(double newArea) {
+    public void setArea(float newArea) {
         if (newArea > 0){
             area = newArea;
         } else {

@@ -5,13 +5,18 @@ import buildings.Flat;
 /**
  * Created by Kingv_000 on 05.10.2015.
  */
-public class DwellingFloor  {
-    private Flat[] flats;
+public class DwellingFloor implements Floor  {
+    private Space[] flats;
     private int sizeOfDwellingFloor;
+
+    public int getCountOfSpace(){
+        return flats.length;
+
+    }
 
 
     public DwellingFloor(int amountOfFlats) {
-        flats = new Flat[amountOfFlats];
+        flats = new Space[amountOfFlats];
         for(int i = 0; i < flats.length; i++) {
             flats[i] = new Flat();
         }
@@ -19,24 +24,23 @@ public class DwellingFloor  {
         sizeOfDwellingFloor = amountOfFlats;
     }
 
-    public DwellingFloor(Flat[] flats) {
-        this.flats = flats;
-        sizeOfDwellingFloor = flats.length;
+    public DwellingFloor(Space[] spaces) {
+        this.flats = spaces;
     }
 
     public int getNumberOfSpaces() {
         return flats.length;
     }
 
-    public double getAllAreaOfFloor() {
-        double totalAreaFloor = 0;
+    public float getTotalArea() {
+        float totalAreaFloor = 0;
         for(int i = 0; i < sizeOfDwellingFloor; i++) {
             totalAreaFloor += flats[i].getArea();
         }
         return totalAreaFloor;
     }
 
-    public int getNumberRoomsOfSpaces() {
+    public int getTotalCountOfRooms() {
         int totalAmountOfRooms = 0;
         for(int i = 0; i < sizeOfDwellingFloor; i++) {
             totalAmountOfRooms += flats[i].getAmtOfRoom();
@@ -44,15 +48,15 @@ public class DwellingFloor  {
         return totalAmountOfRooms;
     }
 
-    public Flat[] getMassSpaces() {
+    public Space[] getSpaces() {
         return flats;
     }
 
-    public Flat getOneSpace(int numberOfFlat) {
+    public Space getSpace(int numberOfFlat) {
         return flats[numberOfFlat];
     }
 
-    public Flat getBestSpace() {
+    public Space getBestSpace() {
         double maxArea = 0;
         int numberOfFlat = 0;
         for(int i = 0; i < flats.length; i++) {
@@ -64,14 +68,14 @@ public class DwellingFloor  {
         return flats[numberOfFlat];
     }
 
-    public void changeSpace(int numberOfFlat, Flat newFlat) {
+    public void changeSpace(int numberOfFlat, Space newFlat) {
         flats[numberOfFlat].setArea(newFlat.getArea());
         flats[numberOfFlat].setAmtOfRoom(newFlat.getAmtOfRoom());
     }
 
 
-    public void addFitSpace(int numberOfFlat, Flat newFlat) {
-        Flat[] tempFlats = new Flat[flats.length + 1];
+    public void addFitSpace(int numberOfFlat, Space newFlat) {
+        Space[] tempFlats = new Space[flats.length + 1];
         int j = 0;
         for(int i = 0; i < flats.length + 1; i++) {
             if(i == numberOfFlat) {
@@ -86,7 +90,7 @@ public class DwellingFloor  {
     }
 
     public void deleteSpace(int numberOfFlat) {
-        Flat[] tempFlats = new Flat[flats.length - 1];
+        Space[] tempFlats = new Flat[flats.length - 1];
         int j = 0;
         for (int i = 0; i < flats.length; i++) {
             if (i != numberOfFlat) {
@@ -96,15 +100,16 @@ public class DwellingFloor  {
         }
         flats = tempFlats;
     }
-    public void changeSpace(int number, Space newSpace){
+    public void addSpace(Space space){
+        Space[] buffFlats = new Flat[this.flats.length + 1];
+        for (int i = 0; i <this.flats.length ; i++) {
+            buffFlats[i] = this.flats[i];
+        }
+        buffFlats[buffFlats.length - 1 ] = space;
+        this.flats = buffFlats;
+    }
+    public void setSpace(int number,Space space){
+        this.flats[number] = space;
 
     }
-    public void addNewSpace(int number){
-
-    }
-    public void addFitSpace(int number, Space newSpace){
-
-    }
-
-
 }
