@@ -1,4 +1,4 @@
-package buildings;
+package buildings.collection;
 
 import java.io.Serializable;
 

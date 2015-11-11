@@ -1,4 +1,4 @@
-package buildings;
+package buildings.exceptions;
 
 /**
  * Created by Kingv_000 on 26.10.2015.

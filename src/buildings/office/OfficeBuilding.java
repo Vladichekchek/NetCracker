@@ -1,4 +1,10 @@
-package buildings;
+package buildings.office;
+
+import buildings.Interfaces.Building;
+import buildings.Interfaces.Floor;
+import buildings.Interfaces.Space;
+import buildings.exceptions.FloorIndexOutOfBoundsException;
+import buildings.collection.DoublyLinkedList;
 
 /**
  * Created by Kingv_000 on 13.10.2015.

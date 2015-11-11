@@ -1,11 +1,12 @@
-package buildings;
+package buildings.dwelling;
 
-import buildings.Flat;
+import buildings.Interfaces.Floor;
+import buildings.Interfaces.Space;
 
 /**
  * Created by Kingv_000 on 05.10.2015.
  */
-public class DwellingFloor implements Floor  {
+public class DwellingFloor implements Floor {
     private Space[] flats;
     private int sizeOfDwellingFloor;
 

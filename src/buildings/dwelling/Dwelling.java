@@ -1,11 +1,16 @@
-package buildings;
+package buildings.dwelling;
+
+import buildings.Interfaces.Building;
+import buildings.Interfaces.Floor;
+import buildings.Interfaces.Space;
+import buildings.exceptions.FloorIndexOutOfBoundsException;
 
 /**
  * Created by Kingv_000 on 05.10.2015.
  */
 
 
-public class Dwelling implements Building{
+public class Dwelling implements Building {
     private Floor[] dwellingFloors;
 
     public Dwelling(int countOfFloor, int[] countOfFlat){

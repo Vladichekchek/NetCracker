@@ -1,4 +1,4 @@
-package buildings;
+package buildings.Interfaces;
 
 import java.io.Serializable;
 

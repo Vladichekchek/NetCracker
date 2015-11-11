@@ -1,6 +1,9 @@
-package buildings;
-import buildings.Floor;
-import buildings.Space;
+package buildings.office;
+import buildings.collection.DoublyLinkedList;
+import buildings.Interfaces.Floor;
+import buildings.Interfaces.Space;
+import buildings.exceptions.SpaceIndexOutOfBoundsException;
+
 /**
  * Created by Kingv_000 on 13.10.2015.
  */

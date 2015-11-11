@@ -1,4 +1,6 @@
-package buildings;
+package buildings.dwelling;
+
+import buildings.Interfaces.Space;
 
 /**
  * Created by Kingv_000 on 05.10.2015.

@@ -1,4 +1,6 @@
-package buildings;
+package buildings.office;
+
+import buildings.Interfaces.Space;
 
 /**
  * Created by Kingv_000 on 12.10.2015.
