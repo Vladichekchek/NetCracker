@@ -2,6 +2,9 @@ package buildings.dwelling;
 
 import buildings.Interfaces.Floor;
 import buildings.Interfaces.Space;
+import buildings.iterators.FlatIterator;
+
+import java.util.Iterator;
 
 /**
  * Created by Kingv_000 on 05.10.2015.
@@ -112,5 +115,8 @@ public class DwellingFloor implements Floor {
     public void setSpace(int number,Space space){
         this.flats[number] = space;
 
+    }
+    public Iterator<Flat> iterator(){
+        return new FlatIterator((Flat[])this.flats);
     }
 }

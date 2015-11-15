@@ -5,6 +5,8 @@ import buildings.Interfaces.Floor;
 import buildings.Interfaces.Space;
 import buildings.dwelling.DwellingFloor;
 
+import java.util.Iterator;
+
 /**
  * Created by Kingv_000 on 03.11.2015.
  */
@@ -33,6 +35,7 @@ public class HotelFloor extends DwellingFloor {
     public void setCountStars(int countStars) {
         this.countStars = countStars;
     }
+
 
 
 }

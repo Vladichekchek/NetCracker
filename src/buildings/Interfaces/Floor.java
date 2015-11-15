@@ -1,6 +1,7 @@
 package buildings.Interfaces;
 
 import java.io.Serializable;
+import java.util.Iterator;
 
 /**
  * Created by Kingv_000 on 26.10.2015.
@@ -23,5 +24,7 @@ public interface Floor extends Serializable{
     public void deleteSpace(int number);
 
     public Space getBestSpace();
+
+    public Iterator iterator();
 }
 
