@@ -23,10 +23,6 @@ public class HotelFloor extends DwellingFloor {
         this.countStars = DEFAULT_COUNT_OF_STARS;
     }
 
-
-
-
-
     private int countStars;
     public int getCountStars() {
         return countStars;

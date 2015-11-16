@@ -3,6 +3,9 @@ import buildings.collection.DoublyLinkedList;
 import buildings.Interfaces.Floor;
 import buildings.Interfaces.Space;
 import buildings.exceptions.SpaceIndexOutOfBoundsException;
+import buildings.iterators.OfficeIterator;
+
+import java.util.Iterator;
 
 /**
  * Created by Kingv_000 on 13.10.2015.
@@ -65,6 +68,8 @@ public class OfficeFloor implements Floor {
     public void deleteSpace(int i){
         this.offices.delete(i);
     }
+
+
     public Space getBestSpace(){
         double max = this.offices.get(0).getArea();
         int index = 0;
@@ -75,6 +80,10 @@ public class OfficeFloor implements Floor {
             }
         }
         return this.offices.get(index);
+    }
+
+    public Iterator<Office> iterator(){
+        return new OfficeIterator(this.offices);
     }
 
 

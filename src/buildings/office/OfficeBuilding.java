@@ -1,5 +1,7 @@
 package buildings.office;
 
+import buildings.Buildings;
+import buildings.Factories.OfficeFactory;
 import buildings.Interfaces.Building;
 import buildings.Interfaces.Floor;
 import buildings.Interfaces.Space;

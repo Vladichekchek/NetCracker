@@ -1,7 +1,11 @@
 package buildings;
 
+import buildings.Factories.DwellingFactory;
+import buildings.Factories.OfficeFactory;
 import buildings.Interfaces.Building;
+import buildings.Interfaces.BuildingFactory;
 import buildings.Interfaces.Floor;
+import buildings.Interfaces.Space;
 import buildings.dwelling.Dwelling;
 import buildings.dwelling.DwellingFloor;
 import buildings.dwelling.Flat;
@@ -13,6 +17,15 @@ import java.util.Scanner;
  * Created by Kingv_000 on 28.10.2015.
  */
 public class Buildings {
+
+    private static BuildingFactory buildingFactory= new DwellingFactory();
+
+    public static void setBuildingFactory(BuildingFactory buildingFactoryS){
+     buildingFactory = buildingFactoryS;
+    }
+
+
+
     public static void outputBuilding(Building building, OutputStream out) {
         DataOutputStream dataOutputStream = new DataOutputStream(out);
         try {
@@ -104,5 +117,36 @@ public class Buildings {
         return dwelling;
 
     }
+
+
+
+
+
+
+    public static Space createSpace(float area){
+        return buildingFactory.creatSpace(area);
+    }
+
+    public static Space createSpace(int roomsCount, float area){
+        return buildingFactory.creatSpace(roomsCount, area);
+    }
+
+    public static Floor createFloor(int spacesCount){
+        return buildingFactory.creatFloor(spacesCount);
+    }
+
+    public static Floor createFloor(Space[] spaces){
+        return buildingFactory.creatfloor(spaces);
+    }
+
+    public static Building createBuilding(int floorsCount, int[] spacesCounts){
+        return buildingFactory.creatBuilding(floorsCount, spacesCounts);
+    }
+
+    public static Building createBuilding(Floor[] floors){
+        return buildingFactory.creatBuilding(floors);
+    }
+
+
 }
 
